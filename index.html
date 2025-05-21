@@ -112,7 +112,7 @@
     }
     .btn-insta {
       background: linear-gradient(90deg, var(--insta-purple), var(--insta-red), var(--insta-orange));
-      color: #FFFFFF occasion;
+      color: #FFFFFF;
       border: 1px solid var(--insta-purple);
     }
     .btn-premium:hover, .btn-whatsapp:hover, .btn-insta:hover {
@@ -203,13 +203,6 @@
       0% { background-position: 0 0; }
       100% { background-position: 20px 20px; }
     }
-    .mobile-menu {
-      transition: transform 0.3s ease-in-out;
-      z-index: 40;
-    }
-    .mobile-menu.hidden {
-      transform: translateX(100%);
-    }
     .hero-divider {
       position: absolute;
       bottom: 0;
@@ -238,7 +231,7 @@
       .mobile-contact {
         position: absolute;
         top: 1rem;
-        right: 4rem;
+        right: 1rem;
         font-size: 1rem;
         font-weight: 600;
       }
@@ -262,15 +255,6 @@
           <a href="#contact" class="nav-link text-brown-800 hover:text-gold-400 font-medium text-base">Contact</a>
         </div>
         <a href="#contact" class="mobile-contact md:hidden text-brown-800 hover:text-gold-400 font-medium">Contact</a>
-        <button class="md:hidden text-brown-800 focus:outline-none" id="mobile-menu-btn" aria-label="Toggle menu">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path id="menu-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            <path id="menu-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-      <div class="mobile-menu hidden md:hidden fixed top-16 left-0 w-full bg-beige-50 shadow-lg p-6 z-40" id="mobile-menu">
-        <a href="#contact" class="block text-brown-800 hover:text-gold-400 font-medium text-lg py-3">Contact</a>
       </div>
     </div>
   </nav>
@@ -397,22 +381,7 @@
         document.querySelector(this.getAttribute('href')).scrollIntoView({
           behavior: 'smooth'
         });
-        // Close mobile menu after clicking a link
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenu.classList.add('hidden');
-        document.getElementById('menu-open').classList.remove('hidden');
-        document.getElementById('menu-close').classList.add('hidden');
       });
-    });
-
-    // Toggle mobile menu
-    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-      const mobileMenu = document.getElementById('mobile-menu');
-      const menuOpen = document.getElementById('menu-open');
-      const menuClose = document.getElementById('menu-close');
-      mobileMenu.classList.toggle('hidden');
-      menuOpen.classList.toggle('hidden');
-      menuClose.classList.toggle('hidden');
     });
 
     // Toggle service details on click
