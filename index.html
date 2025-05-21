@@ -112,7 +112,7 @@
     }
     .btn-insta {
       background: linear-gradient(90deg, var(--insta-purple), var(--insta-red), var(--insta-orange));
-      color: #FFFFFF;
+      color: #FFFFFF occasion;
       border: 1px solid var(--insta-purple);
     }
     .btn-premium:hover, .btn-whatsapp:hover, .btn-insta:hover {
@@ -235,9 +235,12 @@
       .service-details {
         font-size: 0.85rem;
       }
-      .mobile-menu {
-        width: 100%;
-        top: 64px;
+      .mobile-contact {
+        position: absolute;
+        top: 1rem;
+        right: 4rem;
+        font-size: 1rem;
+        font-weight: 600;
       }
     }
   </style>
@@ -258,6 +261,7 @@
           <a href="#services" class="nav-link text-brown-800 hover:text-gold-400 font-medium text-base">Services</a>
           <a href="#contact" class="nav-link text-brown-800 hover:text-gold-400 font-medium text-base">Contact</a>
         </div>
+        <a href="#contact" class="mobile-contact md:hidden text-brown-800 hover:text-gold-400 font-medium">Contact</a>
         <button class="md:hidden text-brown-800 focus:outline-none" id="mobile-menu-btn" aria-label="Toggle menu">
           <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path id="menu-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -266,8 +270,6 @@
         </button>
       </div>
       <div class="mobile-menu hidden md:hidden fixed top-16 left-0 w-full bg-beige-50 shadow-lg p-6 z-40" id="mobile-menu">
-        <a href="#home" class="block text-brown-800 hover:text-gold-400 font-medium text-lg py-3">Home</a>
-        <a href="#services" class="block text-brown-800 hover:text-gold-400 font-medium text-lg py-3">Services</a>
         <a href="#contact" class="block text-brown-800 hover:text-gold-400 font-medium text-lg py-3">Contact</a>
       </div>
     </div>
