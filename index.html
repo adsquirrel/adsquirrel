@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>AdSquirrel - Premier Advertising Solutions</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -13,12 +13,10 @@
       overflow-x: hidden;
       background-color: #FAF7F2;
       cursor: url('images/squirrel-cursor.png'), auto;
-      position: relative; /* For gold flakes positioning */
     }
     h1, h2, h3 {
       font-family: 'Cinzel', serif;
     }
-    /* Custom Tailwind Colors */
     :root {
       --beige-50: #FAF7F2;
       --beige-100: #F0ECE3;
@@ -76,11 +74,7 @@
     .navbar {
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
       background-color: transparent;
-      position: fixed;
-      width: 100%;
-      z-index: 20;
-      top: 0;
-      height: 64px; /* Fixed height for consistency */
+      z-index: 50;
     }
     .navbar.scrolled {
       background-color: rgba(250, 247, 242, 0.95);
@@ -100,72 +94,40 @@
       height: 2px;
       background-color: var(--gold-400);
     }
-    .btn-premium {
+    .btn-premium, .btn-whatsapp, .btn-insta {
       position: relative;
+      border-radius: 8px;
+      transition: background 0.3s ease, transform 0.3s ease;
+      overflow: hidden;
+    }
+    .btn-premium {
       background: linear-gradient(90deg, var(--gold-400), var(--gold-500));
       color: var(--brown-800);
       border: 1px solid var(--gold-400);
-      border-radius: 8px;
-      transition: background 0.3s ease, transform 0.3s ease;
-      overflow: hidden;
-    }
-    .btn-premium:hover {
-      background: linear-gradient(90deg, var(--gold-400), #FFFFFF);
-      transform: scale(1.05);
-    }
-    .btn-premium::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.4);
-      transition: left 0.5s ease;
-    }
-    .btn-premium:hover::after {
-      left: 100%;
     }
     .btn-whatsapp {
-      position: relative;
       background: linear-gradient(90deg, var(--whatsapp-green), var(--whatsapp-dark));
       color: #FFFFFF;
       border: 1px solid var(--whatsapp-green);
-      border-radius: 8px;
-      transition: background 0.3s ease, transform 0.3s ease;
-      overflow: hidden;
-    }
-    .btn-whatsapp:hover {
-      background: linear-gradient(90deg, var(--whatsapp-green), #FFFFFF);
-      transform: scale(1.05);
-    }
-    .btn-whatsapp::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.4);
-      transition: left 0.5s ease;
-    }
-    .btn-whatsapp:hover::after {
-      left: 100%;
     }
     .btn-insta {
-      position: relative;
       background: linear-gradient(90deg, var(--insta-purple), var(--insta-red), var(--insta-orange));
       color: #FFFFFF;
       border: 1px solid var(--insta-purple);
-      border-radius: 8px;
-      transition: background 0.3s ease, transform 0.3s ease;
-      overflow: hidden;
+    }
+    .btn-premium:hover, .btn-whatsapp:hover, .btn-insta:hover {
+      transform: scale(1.05);
+    }
+    .btn-premium:hover {
+      background: linear-gradient(90deg, var(--gold-400), #FFFFFF);
+    }
+    .btn-whatsapp:hover {
+      background: linear-gradient(90deg, var(--whatsapp-green), #FFFFFF);
     }
     .btn-insta:hover {
       background: linear-gradient(90deg, var(--insta-purple), #FFFFFF);
-      transform: scale(1.05);
     }
-    .btn-insta::after {
+    .btn-premium::after, .btn-whatsapp::after, .btn-insta::after {
       content: '';
       position: absolute;
       top: 0;
@@ -175,15 +137,13 @@
       background: rgba(255, 255, 255, 0.4);
       transition: left 0.5s ease;
     }
-    .btn-insta:hover::after {
+    .btn-premium:hover::after, .btn-whatsapp:hover::after, .btn-insta:hover::after {
       left: 100%;
     }
     .hero-section {
       position: relative;
       background: linear-gradient(135deg, #FAF7F2 0%, #F0ECE3 100%);
       overflow: hidden;
-      padding-top: calc(4rem + 64px); /* Adjust for navbar height */
-      padding-bottom: 5rem;
     }
     .sparkle {
       position: absolute;
@@ -243,53 +203,13 @@
       0% { background-position: 0 0; }
       100% { background-position: 20px 20px; }
     }
-    /* Mobile menu styles */
     .mobile-menu {
       transition: transform 0.3s ease-in-out;
-      transform: translateX(100%);
-      position: fixed;
-      top: 64px;
-      right: 0;
-      width: 75%;
-      height: calc(100vh - 64px);
-      background-color: var(--beige-50);
-      box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
-      padding: 1.5rem;
-      z-index: 10;
-    }
-    .mobile-menu.open {
-      transform: translateX(0);
+      z-index: 40;
     }
     .mobile-menu.hidden {
       transform: translateX(100%);
     }
-    .mobile-menu a {
-      display: block;
-      padding: 0.75rem 0;
-      font-size: 1.125rem;
-      font-weight: 500;
-      color: var(--brown-800);
-      border-bottom: 1px solid var(--gold-500);
-    }
-    .mobile-menu a:hover {
-      color: var(--gold-400);
-    }
-    /* Hamburger icon animation */
-    #mobile-menu-btn[aria-expanded="true"] .hamburger-top {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    #mobile-menu-btn[aria-expanded="true"] .hamburger-middle {
-      opacity: 0;
-    }
-    #mobile-menu-btn[aria-expanded="true"] .hamburger-bottom {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
-    .hamburger-top,
-    .hamburger-middle,
-    .hamburger-bottom {
-      transition: all 0.3s ease;
-    }
-    /* Decorative element for hero section */
     .hero-divider {
       position: absolute;
       bottom: 0;
@@ -300,57 +220,36 @@
       background: var(--gold-400);
       border-radius: 2px;
     }
-    /* Gold Flakes */
-    .gold-flake {
-      position: fixed;
-      background: var(--gold-400);
-      border-radius: 50%;
-      opacity: 0.3;
-      pointer-events: none;
-      z-index: 5; /* Below navbar but above content */
-      animation: float 10s infinite ease-in-out;
-    }
-    @keyframes float {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.3; }
-      50% { opacity: 0.5; }
-      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0.2; }
-    }
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .hero-section {
-        padding-top: calc(4rem + 64px);
-        padding-bottom: 5rem;
+    /* Mobile-specific adjustments */
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 2.5rem;
       }
-      .navbar {
-        height: 64px;
+      .btn-premium, .btn-whatsapp, .btn-insta {
+        font-size: 0.9rem;
+        padding: 0.75rem 1.5rem;
       }
-      .mobile-menu-btn svg {
-        width: 28px;
-        height: 28px;
+      .service-card {
+        padding: 1rem;
       }
-    }
-    @media (min-width: 769px) {
+      .service-details {
+        font-size: 0.85rem;
+      }
       .mobile-menu {
-        display: none;
+        width: 100%;
+        top: 64px;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Gold Flakes -->
-  <div class="gold-flake" style="width: 6px; height: 6px; left: 10%; animation-delay: 0s;"></div>
-  <div class="gold-flake" style="width: 8px; height: 8px; left: 30%; animation-delay: 2s;"></div>
-  <div class="gold-flake" style="width: 5px; height: 5px; left: 50%; animation-delay: 4s;"></div>
-  <div class="gold-flake" style="width: 7px; height: 7px; left: 70%; animation-delay: 6s;"></div>
-  <div class="gold-flake" style="width: 6px; height: 6px; left: 90%; animation-delay: 8s;"></div>
-
   <!-- Navbar -->
-  <nav class="navbar fixed w-full z-20">
+  <nav class="navbar fixed w-full z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16 items-center">
         <div class="flex items-center">
           <img src="images/adsquirrel.png" alt="AdSquirrel Logo" class="h-10 w-auto">
-          <span class="ml-3 text-2xl sm:text-3xl font-bold">
+          <span class="ml-2 text-xl sm:text-2xl font-bold">
             <span style="color: var(--brown-dark)">Ad</span><span style="color: var(--brown-light)">Squirrel</span>
           </span>
         </div>
@@ -359,46 +258,44 @@
           <a href="#services" class="nav-link text-brown-800 hover:text-gold-400 font-medium text-base">Services</a>
           <a href="#contact" class="nav-link text-brown-800 hover:text-gold-400 font-medium text-base">Contact</a>
         </div>
-        <button class="md:hidden text-brown-800 focus:outline-none" id="mobile-menu-btn" aria-expanded="false">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path class="hamburger-top" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"></path>
-            <path class="hamburger-middle" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16"></path>
-            <path class="hamburger-bottom" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16"></path>
+        <button class="md:hidden text-brown-800 focus:outline-none" id="mobile-menu-btn" aria-label="Toggle menu">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path id="menu-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            <path id="menu-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
-      <div class="mobile-menu hidden md:hidden" id="mobile-menu">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#contact" class="nav-link">Contact</a>
+      <div class="mobile-menu hidden md:hidden fixed top-16 left-0 w-full bg-beige-50 shadow-lg p-6 z-40" id="mobile-menu">
+        <a href="#home" class="block text-brown-800 hover:text-gold-400 font-medium text-lg py-3">Home</a>
+        <a href="#services" class="block text-brown-800 hover:text-gold-400 font-medium text-lg py-3">Services</a>
+        <a href="#contact" class="block text-brown-800 hover:text-gold-400 font-medium text-lg py-3">Contact</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="hero-section relative overflow-hidden">
+  <section id="home" class="hero-section pt-24 pb-16 relative overflow-hidden">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-brown-800 mb-6 animate-reveal tracking-tight leading-tight">Craft Your Brand’s Legacy</h1>
-      <p class="text-xl sm:text-2xl text-brown-800 mb-10 max-w-2xl mx-auto animate-reveal" style="font-family: 'Open Sans', sans-serif; line-height: 1.6;">Bespoke video ads and viral Instagram campaigns, crafted for timeless impact.</p>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-brown-800 mb-6 animate-reveal tracking-tight leading-tight">Craft Your Brand’s Legacy</h1>
+      <p class="text-lg sm:text-xl text-brown-800 mb-8 max-w-2xl mx-auto animate-reveal" style="font-family: 'Open Sans', sans-serif; line-height: 1.6;">Bespoke video ads and viral Instagram campaigns, crafted for timeless impact.</p>
       <div class="flex justify-center">
-        <a href="#contact" class="inline-block btn-premium font-semibold py-4 px-10 hover-glow text-xl tracking-wide">Begin Your Journey</a>
+        <a href="#contact" class="inline-block btn-premium font-semibold py-3 px-8 hover-glow text-lg sm:text-xl tracking-wide">Begin Your Journey</a>
       </div>
       <div class="hero-divider animate-reveal"></div>
     </div>
-    <!-- Subtle Sparkle Effects -->
-    <div class="sparkle" style="left: 20%; top: 30%; width: 8px; height: 8px; animation-delay: 0s;"></div>
-    <div class="sparkle" style="left: 80%; top: 70%; width: 6px; height: 6px; animation-delay: 2s;"></div>
+    <div class="sparkle hidden sm:block" style="left: 20%; top: 30%; width: 8px; height: 8px; animation-delay: 0s;"></div>
+    <div class="sparkle hidden sm:block" style="left: 80%; top: 70%; width: 6px; height: 6px; animation-delay: 2s;"></div>
     <div class="divider"></div>
   </section>
 
   <!-- Services Section -->
-  <section id="services" class="py-16 bg-beige-50">
+  <section id="services" class="py-12 bg-beige-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl sm:text-4xl font-bold text-center text-brown-800 mb-12 animate-reveal">Our Services</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold text-center text-brown-800 mb-8 animate-reveal">Our Services</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="service-card hover-glow animate-reveal" onclick="toggleDetails('video-ad')">
-          <h3 class="text-xl font-semibold text-brown-800 mb-3">Video Ad Production</h3>
-          <p class="text-2xl font-bold text-gold-400 mb-4">₹5,000</p>
+          <h3 class="text-lg sm:text-xl font-semibold text-brown-800 mb-3">Video Ad Production</h3>
+          <p class="text-xl sm:text-2xl font-bold text-gold-400 mb-4">₹5,000</p>
           <p class="text-brown-800 text-sm">High-quality, engaging video ads for social media.</p>
           <div id="video-ad" class="service-details text-brown-800 text-sm">
             <p>High-quality, engaging video advertisements designed specifically for social media platforms.</p>
@@ -412,8 +309,8 @@
           </div>
         </div>
         <div class="service-card hover-glow animate-reveal" onclick="toggleDetails('insta-post')">
-          <h3 class="text-xl font-semibold text-brown-800 mb-3">Social Media Posting</h3>
-          <p class="text-2xl font-bold text-gold-400 mb-4">₹2,000</p>
+          <h3 class="text-lg sm:text-xl font-semibold text-brown-800 mb-3">Social Media Posting</h3>
+          <p class="text-xl sm:text-2xl font-bold text-gold-400 mb-4">₹2,000</p>
           <p class="text-brown-800 text-sm">Feature on our viral Instagram pages.</p>
           <div id="insta-post" class="service-details text-brown-800 text-sm">
             <p>Get featured on our viral Instagram pages and reach a wider audience instantly.</p>
@@ -426,8 +323,8 @@
           </div>
         </div>
         <div class="service-card hover-glow animate-reveal" onclick="toggleDetails('combo')">
-          <h3 class="text-xl font-semibold text-brown-800 mb-3">Production + Social Media</h3>
-          <p class="text-2xl font-bold text-gold-400 mb-4">₹6,000</p>
+          <h3 class="text-lg sm:text-xl font-semibold text-brown-800 mb-3">Production + Social Media</h3>
+          <p class="text-xl sm:text-2xl font-bold text-gold-400 mb-4">₹6,000</p>
           <p class="text-brown-800 text-sm">Video production and Instagram posting.</p>
           <div id="combo" class="service-details text-brown-800 text-sm">
             <p>Combines video production and Instagram posting, saving you ₹1,000.</p>
@@ -445,8 +342,8 @@
           </div>
         </div>
         <div class="service-card hover-glow animate-reveal" onclick="toggleDetails('custom')">
-          <h3 class="text-xl font-semibold text-brown-800 mb-3">Custom Ads</h3>
-          <p class="text-2xl font-bold text-gold-400 mb-4">Contact Us</p>
+          <h3 class="text-lg sm:text-xl font-semibold text-brown-800 mb-3">Custom Ads</h3>
+          <p class="text-xl sm:text-2xl font-bold text-gold-400 mb-4">Contact Us</p>
           <p class="text-brown-800 text-sm">Fully customized ads for your needs.</p>
           <div id="custom" class="service-details text-brown-800 text-sm">
             Fully customized ads designed to meet unique client specifications and goals.
@@ -466,27 +363,27 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2H5zm14 2h.01M12 9a3 3 0 100 6 3 3 0 000-6zm0 0a6 6 0 016 6v3m-6-9a9 9 0 00-9 9v3"></path>
         </svg>
         <p class="text-base sm:text-lg text-brown-800 mb-6">Follow <a href="https://www.instagram.com/ad.squirrel/" target="_blank" rel="noopener noreferrer" class="text-gold-400 font-semibold hover:underline">@ad.squirrel</a> for viral content and exclusive campaign insights.</p>
-        <a href="https://www.instagram.com/ad.squirrel/" target="_blank" rel="noopener noreferrer" class="inline-block btn-insta font-semibold py-3 px-8 hover-glow text-lg">Follow @ad.squirrel</a>
+        <a href="https://www.instagram.com/ad.squirrel/" target="_blank" rel="noopener noreferrer" class="inline-block btn-insta font-semibold py-3 px-8 hover-glow text-base sm:text-lg">Follow @ad.squirrel</a>
       </div>
       <div class="divider"></div>
     </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-16 bg-beige-100">
+  <section id="contact" class="py-12 bg-beige-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl sm:text-4xl font-bold text-brown-800 mb-12 animate-reveal">Partner with Excellence</h2>
-      <p class="text-lg sm:text-xl text-brown-800 mb-8 max-w-3xl mx-auto">Elevate your brand with bespoke advertising solutions. Contact us today.</p>
+      <h2 class="text-2xl sm:text-3xl font-bold text-brown-800 mb-8 animate-reveal">Partner with Excellence</h2>
+      <p class="text-base sm:text-lg text-brown-800 mb-6 max-w-3xl mx-auto">Elevate your brand with bespoke advertising solutions. Contact us today.</p>
       <div class="flex justify-center">
-        <a href="https://wa.me/918129919550" class="inline-block btn-whatsapp font-semibold py-3 px-8 hover-glow text-lg">WhatsApp Us</a>
+        <a href="https://wa.me/918129919550" class="inline-block btn-whatsapp font-semibold py-3 px-8 hover-glow text-base sm:text-lg">WhatsApp Us</a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-brown-800 text-beige-50 py-10">
+  <footer class="bg-brown-800 text-beige-50 py-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p class="text-base">© 2025 <span class="logo-glow"><span style="color: var(--brown-dark)">Ad</span><span style="color: var(--brown-light)">Squirrel</span></span>. All rights reserved.</p>
-      <p class="mt-3 text-base">Follow us on Instagram: <a href="https://www.instagram.com/ad.squirrel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="underline hover:text-gold-400">@ad.squirrel</a></p>
+      <p class="text-sm sm:text-base">© 2025 <span class="logo-glow"><span style="color: var(--brown-dark)">Ad</span><span style="color: var(--brown-light)">Squirrel</span></span>. All rights reserved.</p>
+      <p class="mt-2 text-sm sm:text-base">Follow us on Instagram: <a href="https://www.instagram.com/ad.squirrel?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="underline hover:text-gold-400">@ad.squirrel</a></p>
     </div>
   </footer>
 
@@ -500,21 +397,20 @@
         });
         // Close mobile menu after clicking a link
         const mobileMenu = document.getElementById('mobile-menu');
-        const menuBtn = document.getElementById('mobile-menu-btn');
         mobileMenu.classList.add('hidden');
-        mobileMenu.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', 'false');
+        document.getElementById('menu-open').classList.remove('hidden');
+        document.getElementById('menu-close').classList.add('hidden');
       });
     });
 
     // Toggle mobile menu
     document.getElementById('mobile-menu-btn').addEventListener('click', () => {
       const mobileMenu = document.getElementById('mobile-menu');
-      const menuBtn = document.getElementById('mobile-menu-btn');
-      const isOpen = mobileMenu.classList.contains('open');
-      mobileMenu.classList.toggle('hidden', isOpen);
-      mobileMenu.classList.toggle('open', !isOpen);
-      menuBtn.setAttribute('aria-expanded', !isOpen);
+      const menuOpen = document.getElementById('menu-open');
+      const menuClose = document.getElementById('menu-close');
+      mobileMenu.classList.toggle('hidden');
+      menuOpen.classList.toggle('hidden');
+      menuClose.classList.toggle('hidden');
     });
 
     // Toggle service details on click
