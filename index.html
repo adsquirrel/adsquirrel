@@ -174,20 +174,20 @@
     }
     .hero-section {
       position: relative;
-      background: radial-gradient(circle at center, #F0ECE3 0%, #D4A017 100%);
+      background: linear-gradient(135deg, #FAF7F2 0%, #F0ECE3 100%);
       overflow: hidden;
     }
     .sparkle {
       position: absolute;
       background: var(--gold-400);
       border-radius: 50%;
-      opacity: 0.7;
-      animation: sparkle 8s infinite;
+      opacity: 0.5;
+      animation: sparkle 6s infinite;
     }
     @keyframes sparkle {
-      0% { transform: scale(0.5) translateY(0); opacity: 0.7; }
-      50% { transform: scale(1.2) translateY(-20px); opacity: 0.3; }
-      100% { transform: scale(0.5) translateY(0); opacity: 0.7; }
+      0% { transform: scale(0.4) translateY(0); opacity: 0.5; }
+      50% { transform: scale(0.8) translateY(-15px); opacity: 0.2; }
+      100% { transform: scale(0.4) translateY(0); opacity: 0.5; }
     }
     .divider {
       position: relative;
@@ -242,6 +242,17 @@
     .mobile-menu.hidden {
       transform: translateX(100%);
     }
+    /* Decorative element for hero section */
+    .hero-divider {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: var(--gold-400);
+      border-radius: 2px;
+    }
   </style>
 </head>
 <body>
@@ -275,20 +286,18 @@
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="hero-section pt-24 pb-20 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-reveal">
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-brown-800 mb-6">Redefine Your Brand’s Story</h1>
-      <p class="text-lg sm:text-xl text-brown-800 mb-8 max-w-3xl mx-auto">Exquisite video ads and viral Instagram campaigns designed for maximum impact.</p>
-      <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-        <a href="#contact" class="inline-block btn-premium font-semibold py-3 px-8 hover-glow text-lg">Get Started</a>
+  <section id="home" class="hero-section pt-28 pb-24 relative overflow-hidden">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-brown-800 mb-6 animate-reveal tracking-tight leading-tight">Craft Your Brand’s Legacy</h1>
+      <p class="text-xl sm:text-2xl text-brown-800 mb-10 max-w-2xl mx-auto animate-reveal" style="font-family: 'Open Sans', sans-serif; line-height: 1.6;">Bespoke video ads and viral Instagram campaigns, crafted for timeless impact.</p>
+      <div class="flex justify-center">
+        <a href="#contact" class="inline-block btn-premium font-semibold py-4 px-10 hover-glow text-xl tracking-wide">Begin Your Journey</a>
       </div>
+      <div class="hero-divider animate-reveal"></div>
     </div>
-    <!-- Enhanced Sparkle Effects -->
-    <div class="sparkle" style="left: 10%; top: 60%; width: 6px; height: 6px; animation-delay: 0s;"></div>
-    <div class="sparkle" style="left: 20%; top: 40%; width: 10px; height: 10px; animation-delay: 1s;"></div>
-    <div class="sparkle" style="left: 50%; top: 70%; width: 8px; height: 8px; animation-delay: 2s;"></div>
-    <div class="sparkle" style="left: 70%; top: 50%; width: 12px; height: 12px; animation-delay: 3s;"></div>
-    <div class="sparkle" style="left: 90%; top: 80%; width: 7px; height: 7px; animation-delay: 4s;"></div>
+    <!-- Subtle Sparkle Effects -->
+    <div class="sparkle" style="left: 20%; top: 30%; width: 8px; height: 8px; animation-delay: 0s;"></div>
+    <div class="sparkle" style="left: 80%; top: 70%; width: 6px; height: 6px; animation-delay: 2s;"></div>
     <div class="divider"></div>
   </section>
 
