@@ -12,7 +12,8 @@
       font-family: 'Open Sans', sans-serif;
       overflow-x: hidden;
       background-color: #FAF7F2;
-      cursor: url('images/squirrel-cursor.png'), auto; /* Custom squirrel cursor */
+      cursor: url('images/squirrel-cursor.png'), auto;
+      position: relative; /* For gold flakes positioning */
     }
     h1, h2, h3 {
       font-family: 'Cinzel', serif;
@@ -24,8 +25,8 @@
       --gold-400: #D4A017;
       --gold-500: #C19A6B;
       --brown-800: #4A2F1D;
-      --brown-dark: #3C2415; /* Darker brown for "Ad" */
-      --brown-light: #5C4033; /* Lighter brown for "Squirrel" */
+      --brown-dark: #3C2415;
+      --brown-light: #5C4033;
       --whatsapp-green: #25D366;
       --whatsapp-dark: #128C7E;
       --insta-purple: #833AB4;
@@ -75,6 +76,11 @@
     .navbar {
       transition: background-color 0.3s ease, box-shadow 0.3s ease;
       background-color: transparent;
+      position: fixed;
+      width: 100%;
+      z-index: 20;
+      top: 0;
+      height: 64px; /* Fixed height for consistency */
     }
     .navbar.scrolled {
       background-color: rgba(250, 247, 242, 0.95);
@@ -176,6 +182,8 @@
       position: relative;
       background: linear-gradient(135deg, #FAF7F2 0%, #F0ECE3 100%);
       overflow: hidden;
+      padding-top: calc(4rem + 64px); /* Adjust for navbar height */
+      padding-bottom: 5rem;
     }
     .sparkle {
       position: absolute;
@@ -238,9 +246,48 @@
     /* Mobile menu styles */
     .mobile-menu {
       transition: transform 0.3s ease-in-out;
+      transform: translateX(100%);
+      position: fixed;
+      top: 64px;
+      right: 0;
+      width: 75%;
+      height: calc(100vh - 64px);
+      background-color: var(--beige-50);
+      box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
+      z-index: 10;
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
     }
     .mobile-menu.hidden {
       transform: translateX(100%);
+    }
+    .mobile-menu a {
+      display: block;
+      padding: 0.75rem 0;
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--brown-800);
+      border-bottom: 1px solid var(--gold-500);
+    }
+    .mobile-menu a:hover {
+      color: var(--gold-400);
+    }
+    /* Hamburger icon animation */
+    #mobile-menu-btn[aria-expanded="true"] .hamburger-top {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    #mobile-menu-btn[aria-expanded="true"] .hamburger-middle {
+      opacity: 0;
+    }
+    #mobile-menu-btn[aria-expanded="true"] .hamburger-bottom {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+    .hamburger-top,
+    .hamburger-middle,
+    .hamburger-bottom {
+      transition: all 0.3s ease;
     }
     /* Decorative element for hero section */
     .hero-divider {
@@ -253,16 +300,57 @@
       background: var(--gold-400);
       border-radius: 2px;
     }
+    /* Gold Flakes */
+    .gold-flake {
+      position: fixed;
+      background: var(--gold-400);
+      border-radius: 50%;
+      opacity: 0.3;
+      pointer-events: none;
+      z-index: 5; /* Below navbar but above content */
+      animation: float 10s infinite ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0.3; }
+      50% { opacity: 0.5; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0.2; }
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding-top: calc(4rem + 64px);
+        padding-bottom: 5rem;
+      }
+      .navbar {
+        height: 64px;
+      }
+      .mobile-menu-btn svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+    @media (min-width: 769px) {
+      .mobile-menu {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Gold Flakes -->
+  <div class="gold-flake" style="width: 6px; height: 6px; left: 10%; animation-delay: 0s;"></div>
+  <div class="gold-flake" style="width: 8px; height: 8px; left: 30%; animation-delay: 2s;"></div>
+  <div class="gold-flake" style="width: 5px; height: 5px; left: 50%; animation-delay: 4s;"></div>
+  <div class="gold-flake" style="width: 7px; height: 7px; left: 70%; animation-delay: 6s;"></div>
+  <div class="gold-flake" style="width: 6px; height: 6px; left: 90%; animation-delay: 8s;"></div>
+
   <!-- Navbar -->
   <nav class="navbar fixed w-full z-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16 items-center">
         <div class="flex items-center">
           <img src="images/adsquirrel.png" alt="AdSquirrel Logo" class="h-10 w-auto">
-          <span class="ml-3 text-2xl sm:text-3xl font-bold ">
+          <span class="ml-3 text-2xl sm:text-3xl font-bold">
             <span style="color: var(--brown-dark)">Ad</span><span style="color: var(--brown-light)">Squirrel</span>
           </span>
         </div>
@@ -271,22 +359,24 @@
           <a href="#services" class="nav-link text-brown-800 hover:text-gold-400 font-medium text-base">Services</a>
           <a href="#contact" class="nav-link text-brown-800 hover:text-gold-400 font-medium text-base">Contact</a>
         </div>
-        <button class="md:hidden text-brown-800 focus:outline-none" id="mobile-menu-btn">
+        <button class="md:hidden text-brown-800 focus:outline-none" id="mobile-menu-btn" aria-expanded="false">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            <path class="hamburger-top" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"></path>
+            <path class="hamburger-middle" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16"></path>
+            <path class="hamburger-bottom" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16"></path>
           </svg>
         </button>
       </div>
-      <div class="mobile-menu hidden md:hidden fixed top-16 right-0 w-3/4 bg-beige-50 shadow-lg p-4" id="mobile-menu">
-        <a href="#home" class="block text-brown-800 hover:text-gold-400 font-medium text-base py-2">Home</a>
-        <a href="#services" class="block text-brown-800 hover:text-gold-400 font-medium text-base py-2">Services</a>
-        <a href="#contact" class="block text-brown-800 hover:text-gold-400 font-medium text-base py-2">Contact</a>
+      <div class="mobile-menu hidden md:hidden" id="mobile-menu">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section id="home" class="hero-section pt-28 pb-24 relative overflow-hidden">
+  <section id="home" class="hero-section relative overflow-hidden">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-brown-800 mb-6 animate-reveal tracking-tight leading-tight">Craft Your Brand’s Legacy</h1>
       <p class="text-xl sm:text-2xl text-brown-800 mb-10 max-w-2xl mx-auto animate-reveal" style="font-family: 'Open Sans', sans-serif; line-height: 1.6;">Bespoke video ads and viral Instagram campaigns, crafted for timeless impact.</p>
@@ -410,14 +500,21 @@
         });
         // Close mobile menu after clicking a link
         const mobileMenu = document.getElementById('mobile-menu');
+        const menuBtn = document.getElementById('mobile-menu-btn');
         mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
       });
     });
 
     // Toggle mobile menu
     document.getElementById('mobile-menu-btn').addEventListener('click', () => {
       const mobileMenu = document.getElementById('mobile-menu');
-      mobileMenu.classList.toggle('hidden');
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const isOpen = mobileMenu.classList.contains('open');
+      mobileMenu.classList.toggle('hidden', isOpen);
+      mobileMenu.classList.toggle('open', !isOpen);
+      menuBtn.setAttribute('aria-expanded', !isOpen);
     });
 
     // Toggle service details on click
